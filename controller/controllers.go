@@ -1,11 +1,14 @@
 package controller
 
 import (
+	"log"
 	"milkly-member/config"
 
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
-	echoSwagger "github.com/swaggo/echo-swagger"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/recover"
+	fiberSwagger "github.com/gofiber/swagger"
 )
 
 type Controllers struct {
@@ -21,35 +24,45 @@ func NewControllers(memberController *MemberController, cfg *config.Config) *Con
 }
 
 func (c *Controllers) Listen() {
-	e := echo.New()
+	app := fiber.New(fiber.Config{
+		ErrorHandler: func(ctx *fiber.Ctx, err error) error {
+			code := fiber.StatusInternalServerError
+			if e, ok := err.(*fiber.Error); ok {
+				code = e.Code
+			}
+			return ctx.Status(code).JSON(fiber.Map{
+				"error": err.Error(),
+			})
+		},
+	})
 
 	// Middleware
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-	e.Use(middleware.CORS())
+	app.Use(logger.New())
+	app.Use(recover.New())
+	app.Use(cors.New())
 
 	// Health check endpoint
-	e.GET("/health", func(ctx echo.Context) error {
-		return ctx.JSON(200, map[string]interface{}{
+	app.Get("/health", func(ctx *fiber.Ctx) error {
+		return ctx.JSON(fiber.Map{
 			"status":  "healthy",
 			"service": "milkly-member",
 		})
 	})
 
 	// Swagger endpoint
-	e.GET("/swagger/*", echoSwagger.WrapHandler)
+	app.Get("/swagger/*", fiberSwagger.HandlerDefault)
 
 	// API routes
-	api := e.Group("/api")
+	api := app.Group("/api")
 
 	// Member routes
 	member := api.Group("/member")
-	member.POST("", c.MemberController.CreateMember)
-	member.GET("", c.MemberController.ListMembers)
-	member.GET("/:id", c.MemberController.GetMember)
-	member.PUT("/:id", c.MemberController.UpdateMember)
-	member.DELETE("/:id", c.MemberController.DeleteMember)
+	member.Post("/", c.MemberController.CreateMember)
+	member.Get("/", c.MemberController.ListMembers)
+	member.Get("/:id", c.MemberController.GetMember)
+	member.Put("/:id", c.MemberController.UpdateMember)
+	member.Delete("/:id", c.MemberController.DeleteMember)
 
 	// Start server
-	e.Logger.Fatal(e.Start(":" + c.Config.Port))
+	log.Fatal(app.Listen(":" + c.Config.Port))
 }

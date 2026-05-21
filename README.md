@@ -1,6 +1,6 @@
 # Milkly Member Service
 
-A Go-based REST API service for member management using Echo framework and MongoDB.
+A Go-based REST API service for member management using Fiber framework and MongoDB.
 
 ## Features
 

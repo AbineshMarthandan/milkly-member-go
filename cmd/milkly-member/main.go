@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
@@ -10,8 +11,6 @@ import (
 	"milkly-member/config"
 
 	_ "milkly-member/docs"
-
-	"github.com/labstack/gommon/log"
 )
 
 //	@title			Milkly Member Service API
@@ -29,10 +28,10 @@ func main() {
 		// Start HTTP server with controllers
 		go controllers.Listen()
 
-		log.Info("Milkly Member Service started successfully")
+		log.Println("Milkly Member Service started successfully")
 
 		<-ch
-		log.Info("Shutting down application and releasing resources")
+		log.Println("Shutting down application and releasing resources")
 
 		return nil
 	})

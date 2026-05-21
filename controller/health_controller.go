@@ -1,9 +1,7 @@
 package controller
 
 import (
-	"net/http"
-
-	"github.com/labstack/echo/v4"
+	"github.com/gofiber/fiber/v2"
 )
 
 type HealthController struct{}
@@ -20,8 +18,8 @@ func NewHealthController() *HealthController {
 // @Produce json
 // @Success 200 {object} map[string]interface{}
 // @Router /health [get]
-func (h *HealthController) HealthCheck(ctx echo.Context) error {
-	return ctx.JSON(http.StatusOK, map[string]interface{}{
+func (h *HealthController) HealthCheck(ctx *fiber.Ctx) error {
+	return ctx.JSON(fiber.Map{
 		"status":  "healthy",
 		"service": "milkly-member",
 	})

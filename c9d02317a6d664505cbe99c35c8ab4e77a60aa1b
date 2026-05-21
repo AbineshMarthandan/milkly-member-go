@@ -1,0 +1,33 @@
+controller/controllers.go
+  dc995fdab3480908 4,7-11,27-37,40-42,45-46,53,67
+controller/health_controller.go
+  dc995fdab3480908 4,21-22
+README.md
+  dc995fdab3480908 3
+cmd/milkly-member/main.go
+  dc995fdab3480908 4,31,34
+go.mod
+  dc995fdab3480908 7-8
+controller/member_controller.go
+  dc995fdab3480908 9,36,38-39,45-46,54,58,63,78-79,81,89,93,114-115,117,123-124,130-131,139,144,148,168-169,171,179,183,188,203-205,217,219,224
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "c9d02317a6d664505cbe99c35c8ab4e77a60aa1b",
+  "prompts": {
+    "dc995fdab3480908": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "d49584e2-7516-4bc9-9f3f-86bf575b12a4",
+        "model": "claude-4-sonnet-thinking"
+      },
+      "human_author": "Abinesh M <abinesh.m@gdn-commerce.com>",
+      "messages": [],
+      "total_additions": 83,
+      "total_deletions": 75,
+      "accepted_lines": 69,
+      "overriden_lines": 6
+    }
+  }
+}

@@ -1,0 +1,46 @@
+controller/controllers.go
+  590f0468d677cbaa 12,23-24
+entity/auth.go
+  ad111db2dfaa84c0 3-5,7,9-13,16-24,27-29
+Makefile
+  590f0468d677cbaa 27
+controller/auth_controller.go
+  590f0468d677cbaa 24,26-35
+cmd/milkly-member/main.go
+  590f0468d677cbaa 19
+service/auth_service.go
+  ad111db2dfaa84c0 10-13,20,24-43,46-61,63-73,75-85
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "6305f47295c2f1c3b8fcd14e6802a061f1bd7ba3",
+  "prompts": {
+    "590f0468d677cbaa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "dcbd91f6-bfbe-4efe-b27c-fd9100854650",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Abinesh M <abinesh.m@gdn-commerce.com>",
+      "messages": [],
+      "total_additions": 18,
+      "total_deletions": 8,
+      "accepted_lines": 17,
+      "overriden_lines": 0
+    },
+    "ad111db2dfaa84c0": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9c5686e1-6ab4-41c3-b6e9-01fd6b2be83a",
+        "model": "claude-4-sonnet-thinking"
+      },
+      "human_author": "Abinesh M <abinesh.m@gdn-commerce.com>",
+      "messages": [],
+      "total_additions": 124,
+      "total_deletions": 12,
+      "accepted_lines": 122,
+      "overriden_lines": 1
+    }
+  }
+}

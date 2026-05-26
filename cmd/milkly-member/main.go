@@ -16,7 +16,7 @@ import (
 //	@title			Milkly Member Service API
 //	@version		1.0
 //	@description	API for Milkly Member Management
-//	@basePath		/api/v1
+//	@basePath		/api
 
 //	@contact.name	Milkly Team
 func main() {

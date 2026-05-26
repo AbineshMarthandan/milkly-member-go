@@ -22,8 +22,10 @@ func init() {
 
 	// Register services
 	Container.Provide(service.NewMemberService)
+	Container.Provide(service.NewAuthService)
 
 	// Register controllers
 	Container.Provide(controller.NewMemberController)
+	Container.Provide(controller.NewAuthController)
 	Container.Provide(controller.NewControllers)
 }

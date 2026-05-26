@@ -24,7 +24,7 @@ test:
 
 # Generate Swagger documentation
 swagger:
-	swag init -g cmd/milkly-member/main.go -o docs/
+	swag init -g cmd/milkly-member/main.go --output docs
 
 # Download dependencies
 deps:

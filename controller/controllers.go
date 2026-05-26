@@ -9,17 +9,28 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	fiberSwagger "github.com/gofiber/swagger"
+	"go.uber.org/dig"
 )
 
 type Controllers struct {
+	AuthController   *AuthController
 	MemberController *MemberController
-	Config          *config.Config
+	Config           *config.Config
 }
 
-func NewControllers(memberController *MemberController, cfg *config.Config) *Controllers {
+// ControllerDeps holds all controller dependencies
+type ControllerDeps struct {
+	dig.In
+	AuthController   *AuthController   `optional:"true"`
+	MemberController *MemberController
+	Config           *config.Config
+}
+
+func NewControllers(deps ControllerDeps) *Controllers {
 	return &Controllers{
-		MemberController: memberController,
-		Config:          cfg,
+		AuthController:   deps.AuthController,
+		MemberController: deps.MemberController,
+		Config:           deps.Config,
 	}
 }
 
@@ -54,6 +65,10 @@ func (c *Controllers) Listen() {
 
 	// API routes
 	api := app.Group("/api")
+
+	// Auth routes
+	auth := api.Group("/auth")
+	auth.Post("/login", c.AuthController.Login)
 
 	// Member routes
 	member := api.Group("/member")

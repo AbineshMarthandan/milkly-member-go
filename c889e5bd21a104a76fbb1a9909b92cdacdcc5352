@@ -1,0 +1,66 @@
+controller/auth_controller.go
+  b43e21d2a054b010 72,77,80
+service/auth_service.go
+  b43e21d2a054b010 44,53
+  45015d787ea9f867 5,8,34-37,48,61
+  ad111db2dfaa84c0 59,63,70
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "c889e5bd21a104a76fbb1a9909b92cdacdcc5352",
+  "prompts": {
+    "45015d787ea9f867": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "59fceef7-c986-4bd8-8b67-813793dccaa1",
+        "model": "claude-4-sonnet-thinking"
+      },
+      "human_author": "Abinesh M <abinesh.m@gdn-commerce.com>",
+      "messages": [],
+      "total_additions": 25,
+      "total_deletions": 11,
+      "accepted_lines": 10,
+      "overriden_lines": 1
+    },
+    "6e7a653570c0c9d3": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "46a1fbfc-9c99-4f9b-ad8d-4cff3f4e2aa3",
+        "model": "claude-4-sonnet-thinking"
+      },
+      "human_author": "Abinesh M <abinesh.m@gdn-commerce.com>",
+      "messages": [],
+      "total_additions": 7,
+      "total_deletions": 1,
+      "accepted_lines": 0,
+      "overriden_lines": 0
+    },
+    "ad111db2dfaa84c0": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "9c5686e1-6ab4-41c3-b6e9-01fd6b2be83a",
+        "model": "claude-4-sonnet-thinking"
+      },
+      "human_author": "Abinesh M <abinesh.m@gdn-commerce.com>",
+      "messages": [],
+      "total_additions": 9,
+      "total_deletions": 14,
+      "accepted_lines": 4,
+      "overriden_lines": 2
+    },
+    "b43e21d2a054b010": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "73e69e8e-ee46-46f1-af49-5ae20873223e",
+        "model": "claude-4-sonnet-thinking"
+      },
+      "human_author": "Abinesh M <abinesh.m@gdn-commerce.com>",
+      "messages": [],
+      "total_additions": 6,
+      "total_deletions": 6,
+      "accepted_lines": 5,
+      "overriden_lines": 0
+    }
+  }
+}

@@ -1,8 +1,8 @@
 package entity
 
 import (
-	"time"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"time"
 )
 
 type Member struct {
@@ -10,6 +10,7 @@ type Member struct {
 	Name      string             `bson:"name" json:"name" validate:"required"`
 	Email     string             `bson:"email" json:"email" validate:"required,email"`
 	Phone     string             `bson:"phone" json:"phone"`
+	Password  string             `bson:"password" json:"password"`
 	Status    MemberStatus       `bson:"status" json:"status"`
 	CreatedAt time.Time          `bson:"created_at" json:"created_at"`
 	UpdatedAt time.Time          `bson:"updated_at" json:"updated_at"`
@@ -18,23 +19,11 @@ type Member struct {
 type MemberStatus string
 
 const (
-	MemberStatusActive   MemberStatus = "active"
-	MemberStatusInactive MemberStatus = "inactive"
-	MemberStatusSuspended MemberStatus = "suspended"
+	MemberStatusActive    MemberStatus = "ACTIVE"
+	MemberStatusInactive  MemberStatus = "INACTIVE"
+	MemberStatusSuspended MemberStatus = "SUSPENDED"
+	MemberStatusRejected  MemberStatus = "REJECTED"
 )
-
-type CreateMemberRequest struct {
-	Name  string `json:"name" validate:"required"`
-	Email string `json:"email" validate:"required,email"`
-	Phone string `json:"phone"`
-}
-
-type UpdateMemberRequest struct {
-	Name   *string       `json:"name,omitempty"`
-	Email  *string       `json:"email,omitempty" validate:"omitempty,email"`
-	Phone  *string       `json:"phone,omitempty"`
-	Status *MemberStatus `json:"status,omitempty"`
-}
 
 type MemberResponse struct {
 	ID        string       `json:"id"`

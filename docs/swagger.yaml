@@ -11,18 +11,6 @@ definitions:
       user:
         $ref: '#/definitions/entity.MemberResponse'
     type: object
-  entity.CreateMemberRequest:
-    properties:
-      email:
-        type: string
-      name:
-        type: string
-      phone:
-        type: string
-    required:
-    - email
-    - name
-    type: object
   entity.LoginRequest:
     properties:
       email:
@@ -54,24 +42,33 @@ definitions:
     type: object
   entity.MemberStatus:
     enum:
-    - active
-    - inactive
-    - suspended
+    - ACTIVE
+    - INACTIVE
+    - SUSPENDED
+    - REJECTED
     type: string
     x-enum-varnames:
     - MemberStatusActive
     - MemberStatusInactive
     - MemberStatusSuspended
-  entity.UpdateMemberRequest:
+    - MemberStatusRejected
+  entity.RegisterRequest:
     properties:
       email:
         type: string
       name:
         type: string
+      password:
+        maxLength: 20
+        minLength: 6
+        type: string
       phone:
         type: string
-      status:
-        $ref: '#/definitions/entity.MemberStatus'
+    required:
+    - email
+    - name
+    - password
+    - phone
     type: object
 info:
   contact:
@@ -117,6 +114,43 @@ paths:
       summary: Login member
       tags:
       - auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register a member and return a JWT token
+      parameters:
+      - description: Registration request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/entity.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.AuthResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Register member
+      tags:
+      - auth
   /health:
     get:
       consumes:
@@ -133,183 +167,4 @@ paths:
       summary: Health check endpoint
       tags:
       - health
-  /members:
-    get:
-      consumes:
-      - application/json
-      description: Get a paginated list of all members
-      parameters:
-      - default: 10
-        description: Limit number of results
-        in: query
-        name: limit
-        type: integer
-      - default: 0
-        description: Offset for pagination
-        in: query
-        name: offset
-        type: integer
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/entity.MemberResponse'
-            type: array
-        "400":
-          description: Bad Request
-          schema:
-            additionalProperties: true
-            type: object
-        "500":
-          description: Internal Server Error
-          schema:
-            additionalProperties: true
-            type: object
-      summary: List all members
-      tags:
-      - members
-    post:
-      consumes:
-      - application/json
-      description: Create a new member with the provided information
-      parameters:
-      - description: Member data
-        in: body
-        name: member
-        required: true
-        schema:
-          $ref: '#/definitions/entity.CreateMemberRequest'
-      produces:
-      - application/json
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/entity.MemberResponse'
-        "400":
-          description: Bad Request
-          schema:
-            additionalProperties: true
-            type: object
-        "500":
-          description: Internal Server Error
-          schema:
-            additionalProperties: true
-            type: object
-      summary: Create a new member
-      tags:
-      - members
-  /members/{id}:
-    delete:
-      consumes:
-      - application/json
-      description: Delete a member by their ID
-      parameters:
-      - description: Member ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "204":
-          description: No Content
-        "400":
-          description: Bad Request
-          schema:
-            additionalProperties: true
-            type: object
-        "404":
-          description: Not Found
-          schema:
-            additionalProperties: true
-            type: object
-        "500":
-          description: Internal Server Error
-          schema:
-            additionalProperties: true
-            type: object
-      summary: Delete a member
-      tags:
-      - members
-    get:
-      consumes:
-      - application/json
-      description: Get a member by their unique ID
-      parameters:
-      - description: Member ID
-        in: path
-        name: id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/entity.MemberResponse'
-        "400":
-          description: Bad Request
-          schema:
-            additionalProperties: true
-            type: object
-        "404":
-          description: Not Found
-          schema:
-            additionalProperties: true
-            type: object
-        "500":
-          description: Internal Server Error
-          schema:
-            additionalProperties: true
-            type: object
-      summary: Get a member by ID
-      tags:
-      - members
-    put:
-      consumes:
-      - application/json
-      description: Update a member's information
-      parameters:
-      - description: Member ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Updated member data
-        in: body
-        name: member
-        required: true
-        schema:
-          $ref: '#/definitions/entity.UpdateMemberRequest'
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/entity.MemberResponse'
-        "400":
-          description: Bad Request
-          schema:
-            additionalProperties: true
-            type: object
-        "404":
-          description: Not Found
-          schema:
-            additionalProperties: true
-            type: object
-        "500":
-          description: Internal Server Error
-          schema:
-            additionalProperties: true
-            type: object
-      summary: Update a member
-      tags:
-      - members
 swagger: "2.0"

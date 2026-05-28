@@ -1,0 +1,23 @@
+service/auth_service.go
+  590f0468d677cbaa 13-14,27,51,60,73
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.23",
+  "base_commit_sha": "64eeaae039c227ebfa3fb9ac22fe9a9cb4490876",
+  "prompts": {
+    "590f0468d677cbaa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "dcbd91f6-bfbe-4efe-b27c-fd9100854650",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Abinesh M <abinesh.m@gdn-commerce.com>",
+      "messages": [],
+      "total_additions": 9,
+      "total_deletions": 9,
+      "accepted_lines": 6,
+      "overriden_lines": 3
+    }
+  }
+}
